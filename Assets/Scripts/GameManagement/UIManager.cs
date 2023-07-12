@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private int healthPlayer;
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -40,4 +40,6 @@ public class UIManager : MonoBehaviour
             healths[i].enabled = i < healthPlayer;
         }
     }
+
+    public TextMeshProUGUI GetTextScore() => textScore;
 }

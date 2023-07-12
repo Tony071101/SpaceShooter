@@ -24,6 +24,7 @@ public class Player : BaseCharacter
     private bool isBlocking;
     private bool speedIncreased = false;
     private bool attackIncreased = false;
+    private float highScore;
     private void Start()
     {
         healthSystem.OnDead += HealthSystem_OnDead;
@@ -45,12 +46,12 @@ public class Player : BaseCharacter
         shootTimer += Time.deltaTime;
         Move();
 
-        if(Input.GetMouseButton(0) && shootTimer >= timeBetweenShots)
+        if (Input.GetMouseButton(0) && shootTimer >= timeBetweenShots)
         {
             Shoot();
             shootTimer = 0f;
         }
-        
+
     }
 
     public override void Move()
@@ -81,7 +82,7 @@ public class Player : BaseCharacter
             if (isBlocking)
             {
                 shieldStrength--;
-                if(shieldStrength > 0)
+                if (shieldStrength > 0)
                 {
                     Destroy(collision.gameObject);
                     return;
@@ -98,7 +99,7 @@ public class Player : BaseCharacter
         }
         else if (collision.CompareTag("Enemy"))
         {
-            if(isBlocking)
+            if (isBlocking)
             {
                 shieldStrength = 0;
                 isBlocking = !isBlocking;
@@ -115,6 +116,7 @@ public class Player : BaseCharacter
     {
         Destroy(gameObject);
         FindObjectOfType<GameManager>().GameOver();
+        highScore = score;
         score = 0;
     }
 
@@ -163,4 +165,6 @@ public class Player : BaseCharacter
     }
 
     public int GetAttackDmgToEnemy() => this.attackDmg;
+
+    public float GetPlayerHighScore() => this.highScore;
 }

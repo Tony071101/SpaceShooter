@@ -1,7 +1,7 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -18,7 +18,7 @@ public class Enemy : BaseCharacter
     private GameManager gameManager;
     private void Start()
     {
-        healthSystem.OnDead += HealthSystem_OnDead; 
+        healthSystem.OnDead += HealthSystem_OnDead;
         powerUpSpawner = FindObjectOfType<PowerUpSpawner>();
         scoreUI = FindObjectOfType<UIManager>();
         StartCoroutine(ShootDelay(shootDuration));
@@ -42,9 +42,9 @@ public class Enemy : BaseCharacter
         while (true)
         {
             elapsedTime += Time.deltaTime;
-            if(elapsedTime >= delay)
+            if (elapsedTime >= delay)
             {
-                Shoot();    
+                Shoot();
                 elapsedTime = 0f;
             }
             yield return null;
@@ -72,11 +72,6 @@ public class Enemy : BaseCharacter
             powerUpSpawner.SpawnPowerUp(transform.position);
         }
         Destroy(gameObject);
-        if(score == 100)
-        {
-            score = 0;
-            gameManager.NextLevel();
-        }
     }
 
     public int GetAttackDmgToPlayer() => this.attackDmg;
